@@ -5,7 +5,7 @@ class Solution {
         int[] p1 = dots[0];
         for (int i=1; i<4; i++) {
             int[] p2 = dots[i];
-            for (int j=2; j<4; j++) {
+            for (int j=1; j<4; j++) {
                 if (j==i) continue;
                 int[] p3 = dots[j];
                 int[] p4 = dots[6-(i+j)];
