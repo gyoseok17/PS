@@ -5,14 +5,14 @@ class Solution {
         int answer = 0;
         List<SignalCheck> SignalCheckList = new ArrayList<>();
         
-        long max = 1;
+        int vLcm = 1;
         for(int[] signal : signals) {
             SignalCheckList.add(new SignalCheck(signal));
-            max *= signal[0] + signal[1] + signal[2];
+            vLcm = lcm(vLcm, signal[0] + signal[1] + signal[2]);
         }
         
         int c;
-        for (int t = 1; t <= max; t++) {
+        for (int t = 1; t <= vLcm; t++) {
             c = 0;
             for(SignalCheck SC : SignalCheckList) {
                 if(!SC.check(t)) {
@@ -26,6 +26,14 @@ class Solution {
         }
         return -1;
         
+    }
+    
+    public int lcm(int a, int b) {
+        return a / gcd(a, b) * b;
+    }
+
+    public int gcd(int a, int b) {
+        return b == 0 ? a : gcd(b, a % b);
     }
 
 }
