@@ -5,21 +5,20 @@ class Solution {
         int answer = 0;
         List<SignalCheck> SignalCheckList = new ArrayList<>();
         
-        int vLcm = 1;
+        long max = 1;
         for(int[] signal : signals) {
             SignalCheckList.add(new SignalCheck(signal));
-            vLcm = lcm(vLcm, signal[0] + signal[1] + signal[2]);
+            max *= signal[0] + signal[1] + signal[2];
         }
         
         int c;
-        int t = 0;
-        while(t < vLcm+1) {
-            t++;
+        for (int t = 1; t <= max; t++) {
             c = 0;
             for(SignalCheck SC : SignalCheckList) {
-                if(SC.check(t)) {
-                    c++;
+                if(!SC.check(t)) {
+                    break;
                 }
+                c++;
             }
             if(c == SignalCheckList.size()){
                 return t;
@@ -28,18 +27,7 @@ class Solution {
         return -1;
         
     }
-    
-    public int lcm(int a, int b) {
-        return a * b / gcd(a, b);
-    }
-    public int gcd(int a, int b) {
-        while (b != 0) {
-            int temp = b;
-            b = a % b;
-            a = temp;
-        }
-        return a;
-    }
+
 }
 class SignalCheck {
     int g;
